@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.UserMapper">
+    <insert id="insertUser">
+        insert into t_user values(null,'admin','123456',23,'女','12345@qq.com')
+    </insert>
+    <insert id="insertUserByUser">
+        insert into t_user values(null,#{username},#{password},#{age},#{sex},#{email})
+    </insert>
+    <update id="updateUser">
+        update t_user set username='张三' where id=4
+    </update>
+    <delete id="deleteUser">
+        delete from t_user where id=4
+    </delete>
+    <delete id="batchDeletion">
+        delete from t_user where id in (${ids})
+    </delete>
+    <select id="findById" resultType="com.atguigu.mybatis.pojo.User">
+        select* from t_user where id =#{id}
+    </select>
+    <select id="findAll" resultType="User">
+        select* from t_user
+    </select>
+    <select id="findByName" resultType="com.atguigu.mybatis.pojo.User">
+        select *from t_user where username=#{name}
+    </select>
+    <select id="checkLogin" resultType="com.atguigu.mybatis.pojo.User">
+        select *from t_user where username=#{username} and password=#{password}
+    </select>
+    <select id="findCount" resultType="java.lang.Integer">
+        select COUNT(*) from t_user
+    </select>
+    <select id="findByIdToMap" resultType="java.util.Map">
+        select* from t_user where id =#{id}
+    </select>
+    <select id="findAllToMap" resultType="java.util.Map">
+        select* from t_user
+    </select>
+    <select id="findByBlurry" resultType="com.atguigu.mybatis.pojo.User">
+        select* from t_user where username like "%"#{name}"%"
+    </select>
+    <select id="findByTable" resultType="com.atguigu.mybatis.pojo.User">
+        select* from ${tableName}
+    </select>
+
+</mapper>
